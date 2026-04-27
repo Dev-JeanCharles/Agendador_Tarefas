@@ -1,5 +1,7 @@
-package com.javanauta.agendadortarefas.infrastructure.exceptions;
+package com.javanauta.agendadortarefas.adapters.in.controller;
 
+import com.javanauta.agendadortarefas.infrastructure.exceptions.ResourceNotFoundException;
+import com.javanauta.agendadortarefas.infrastructure.exceptions.UnauthorizedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
