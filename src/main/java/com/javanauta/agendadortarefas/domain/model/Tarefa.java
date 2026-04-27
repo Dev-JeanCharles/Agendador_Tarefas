@@ -1,21 +1,16 @@
-package com.javanauta.agendadortarefas.infrastructure.entity;
+package com.javanauta.agendadortarefas.domain.model;
 
 import com.javanauta.agendadortarefas.domain.enums.StatusNotificacao;
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Document("tarefa")
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class TarefasEntity {
-
-    @Id
+public class Tarefa {
     private String id;
     private String nomeTarefa;
     private String descricao;

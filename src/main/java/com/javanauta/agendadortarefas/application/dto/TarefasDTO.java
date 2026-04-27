@@ -1,7 +1,7 @@
-package com.javanauta.agendadortarefas.business.dto;
+package com.javanauta.agendadortarefas.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.javanauta.agendadortarefas.infrastructure.entity.enums.StatusNotificacao;
+import com.javanauta.agendadortarefas.domain.enums.StatusNotificacao;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -24,3 +24,5 @@ public class TarefasDTO {
     private LocalDateTime dataAlteracao;
     private StatusNotificacao status;
 }
+
+

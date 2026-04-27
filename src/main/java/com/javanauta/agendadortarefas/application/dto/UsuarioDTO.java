@@ -1,8 +1,6 @@
-package com.javanauta.agendadortarefas.business.dto;
+package com.javanauta.agendadortarefas.application.dto;
 
 import lombok.*;
-
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor

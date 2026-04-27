@@ -1,4 +1,4 @@
-package com.javanauta.agendadortarefas.infrastructure.entity.enums;
+package com.javanauta.agendadortarefas.domain.enums;
 
 public enum StatusNotificacao {
     PENDENTE,
