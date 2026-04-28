@@ -1,6 +1,6 @@
 package com.javanauta.agendadortarefas.application.service;
 
-import com.javanauta.agendadortarefas.application.dto.TarefasDTO;
+import com.javanauta.agendadortarefas.application.dto.TarefasDTORecord;
 import com.javanauta.agendadortarefas.application.mappers.TarefaMapper;
 import com.javanauta.agendadortarefas.domain.model.Tarefa;
 import com.javanauta.agendadortarefas.domain.ports.in.TarefaUseCase;
@@ -23,14 +23,14 @@ public class TarefasService implements TarefaUseCase {
     private final JwtUtil jwtUtil;
 
     @Override
-    public TarefasDTO gravarTarefas(String token, TarefasDTO dto) {
+    public TarefasDTORecord gravarTarefas(String token, TarefasDTORecord dto) {
         String email = jwtUtil.extractEmailToken(token.substring(7));
 
-        dto.setDataCriacao(LocalDateTime.now());
-        dto.setStatus(StatusNotificacao.PENDENTE);
-        dto.setEmail(email);
+        TarefasDTORecord dtoFinal = new TarefasDTORecord(null, dto.nomeTarefa(),
+                dto.descricao(), LocalDateTime.now(), dto.dataEvento(), email, null,
+                StatusNotificacao.PENDENTE);
 
-        Tarefa tarefa = tarefaMapper.dtoParaDomain(dto);
+        Tarefa tarefa = tarefaMapper.dtoParaDomain(dtoFinal);
 
         Tarefa salva = repositoryPort.salvar(tarefa);
 
@@ -38,7 +38,7 @@ public class TarefasService implements TarefaUseCase {
     }
 
     @Override
-    public List<TarefasDTO> buscarTarefasAgendadasPorPeriodo(LocalDateTime dataInicial,
+    public List<TarefasDTORecord> buscarTarefasAgendadasPorPeriodo(LocalDateTime dataInicial,
                                                              LocalDateTime dataFinal) {
         return tarefaMapper.listaDomainParaDto(
                 repositoryPort.buscarTarefasPorPeriodo(dataInicial, dataFinal,
@@ -46,7 +46,7 @@ public class TarefasService implements TarefaUseCase {
     }
 
     @Override
-    public List<TarefasDTO> buscaTarefaPorEmail(String token) {
+    public List<TarefasDTORecord> buscaTarefaPorEmail(String token) {
         String email = jwtUtil.extractEmailToken(token.substring(7));
 
         return tarefaMapper.listaDomainParaDto(
@@ -59,7 +59,7 @@ public class TarefasService implements TarefaUseCase {
     }
 
     @Override
-    public TarefasDTO alteraStatus(StatusNotificacao status, String id) {
+    public TarefasDTORecord alteraStatus(StatusNotificacao status, String id) {
         Tarefa tarefa = repositoryPort.buscarPorId(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada"));
 
@@ -70,7 +70,7 @@ public class TarefasService implements TarefaUseCase {
     }
 
     @Override
-    public TarefasDTO atualizaTarefas(TarefasDTO dto, String id) {
+    public TarefasDTORecord atualizaTarefas(TarefasDTORecord dto, String id) {
             Tarefa tarefa = repositoryPort.buscarPorId(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada"));
             tarefaMapper.atualizaDomain(dto, tarefa);
