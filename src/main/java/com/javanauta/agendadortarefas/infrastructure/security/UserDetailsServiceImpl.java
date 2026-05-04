@@ -14,10 +14,10 @@ public class UserDetailsServiceImpl {
     private UsuarioClient client;
 
     public UserDetails carregaDadosUsuario(String email, String token) {
-        UsuarioDTORecord UsuarioDTORecord = client.buscaUsuarioPorEmail(email, token);
+        UsuarioDTORecord usuarioDTORecord = client.buscaUsuarioPorEmail(email, token);
         return User
-                .withUsername(UsuarioDTORecord.email()) // Define o nome de usuário como o e-mail
-                .password(UsuarioDTORecord.senha()) // Define a senha do usuário
+                .withUsername(usuarioDTORecord.email()) // Define o nome de usuário como o e-mail
+                .password(usuarioDTORecord.senha()) // Define a senha do usuário
                 .build();
     }
 }
